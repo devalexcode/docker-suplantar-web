@@ -1,0 +1,10 @@
+[
+    {
+        "host": "https://www.youtube.com",
+        "file": "youtube.html"
+    },
+    {
+        "host": "https://www.google.com",
+        "file": "google.html"
+    }
+]
