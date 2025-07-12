@@ -12,4 +12,5 @@ services:
       - ./server.js:/usr/src/app/server.js:ro
       - ./package.json:/usr/src/app/package.json:ro
       - ./hosts.json:/usr/src/app/hosts.json:ro
-      - ./html:/usr/src/app/html:ro
+      # Monta SOLO html para que refleje cambios al vuelo
+      - ./html:/usr/src/app/html
