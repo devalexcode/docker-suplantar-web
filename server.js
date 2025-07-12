@@ -12,7 +12,7 @@ let mappings;
 try {
     const raw = fs.readFileSync(hostsFile, 'utf8');
     mappings = JSON.parse(raw).map(entry => {
-        const origin = new URL(entry.host).origin;
+        const origin = entry.host;
         const filePath = path.resolve(__dirname, 'html', entry.file);
         return { origin, filePath };
     });
@@ -51,23 +51,22 @@ proxy.onRequest((ctx, callback) => {
         return callback();
     }
 
-    console.log('[REQUEST]', fullUrl.href);
+    const FULL_URL = fullUrl.href.replace(/\/$/, "");
 
     // Si coincide el origin, responde con el HTML cacheado
-    const hit = mappings.find(m => fullUrl.origin === m.origin);
+    const hit = mappings.find(m => FULL_URL === m.origin);
+
     if (hit) {
 
-        const FULL_URL = fullUrl.href.replace(/\/$/, "");
+        console.log('[APLICANDO PROXY]', FULL_URL);
 
-        if (FULL_URL === hit.origin) {
-            const data = htmlCache[hit.origin];
-            ctx.proxyToClientResponse.writeHead(200, {
-                'Content-Type': 'text/html; charset=utf-8',
-                'Content-Length': data.length
-            });
-            ctx.proxyToClientResponse.end(data);
-            return; // omitimos callback() para no reenviar upstream
-        }
+        const data = htmlCache[hit.origin];
+        ctx.proxyToClientResponse.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Content-Length': data.length
+        });
+        ctx.proxyToClientResponse.end(data);
+        return; // omitimos callback() para no reenviar upstream
     }
 
     // Si no coincide, proxy normal
