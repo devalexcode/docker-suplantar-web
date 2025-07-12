@@ -43,7 +43,7 @@ proxy.onRequest((ctx, callback) => {
     // Busca si coincide con algún origin
     const hit = mappings.find(m => FULL_URL === m.origin);
     if (hit) {
-        console.log('[APLICANDO PROXY]', FULL_URL);
+        console.log('[APLICANDO PROXY]', FULL_URL, '[ARCHIVO]', hit.filePath);
 
         // Lee el HTML **en cada petición** para reflejar cambios
         fs.readFile(hit.filePath, (err, data) => {
