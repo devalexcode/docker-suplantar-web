@@ -1,0 +1,12 @@
+{
+    "name": "js-mitm-proxy",
+    "version": "1.0.0",
+    "description": "HTTP(S) MITM proxy con http-mitm-proxy",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "http-mitm-proxy": "^0.8.1"
+    }
+}
