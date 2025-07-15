@@ -1,6 +1,6 @@
 # Suplanta cualquier sitio web
 
-![google](docs/google.com.png)
+![diagrama](docs/diagrama.com.png)
 
 Este proyecto proporciona un proxy HTTP/S basado en Node.js que utiliza MITM (Man-in-the-Middle) para interceptar y modificar tráfico web. Está empaquetado con Docker y docker-compose para facilitar su despliegue.
 
